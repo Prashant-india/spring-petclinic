@@ -51,3 +51,31 @@ INSERT INTO visits VALUES (default, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits VALUES (default, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits VALUES (default, 8, '2013-01-03', 'neutered');
 INSERT INTO visits VALUES (default, 7, '2013-01-04', 'spayed');
+
+
+-- =====================================
+-- Feature Flag Initial Data
+-- =====================================
+
+-- ADD PET feature
+INSERT INTO feature_flags (id, feature_key, enabled, rollout_percentage)
+VALUES (1, 'ADD_PET', TRUE, 100);
+
+-- ADD VISIT feature
+INSERT INTO feature_flags (id, feature_key, enabled, rollout_percentage)
+VALUES (2, 'ADD_VISIT', TRUE, 100);
+
+-- OWNER SEARCH feature
+INSERT INTO feature_flags (id, feature_key, enabled, rollout_percentage)
+VALUES (3, 'OWNER_SEARCH', TRUE, 100);
+
+-- Whitelist users for ADD_VISIT
+INSERT INTO feature_flag_whitelist (feature_flag_id, user_id)
+VALUES (2, '1'),
+       (2, '2'),
+       (3, '2'),
+       (3, '3');
+
+-- Blacklist user for ADD_PET
+INSERT INTO feature_flag_blacklist (feature_flag_id, user_id)
+VALUES (1, '99');
